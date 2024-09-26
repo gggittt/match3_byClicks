@@ -5,7 +5,7 @@ using UnityEngine;
 namespace _Project.Core
 {
 public class ObjectsPoolGeneric<T>
-    where T : MonoBehaviour
+    where T : MonoBehaviour, IReleasable
 {
     readonly Stack<T> _objects;
     readonly T _prefab;
@@ -37,7 +37,7 @@ public class ObjectsPoolGeneric<T>
 
     public void Release( T obj )
     {
-        obj.gameObject.SetActive( false );
+        obj.OnRelease();
     }
 
     T Create( )
@@ -47,4 +47,5 @@ public class ObjectsPoolGeneric<T>
         return obj;
     }
 }
+
 }

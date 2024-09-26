@@ -9,6 +9,7 @@ public class CellCreator : MonoBehaviour
 
     [Inject] GameData _gameData;
     [Inject] CellGrid<Cell> _cellGrid;
+    [Inject] SelectionManager _selectionManager;
 
     public void CreateBoard( )
     {
@@ -27,6 +28,7 @@ public class CellCreator : MonoBehaviour
         Cell cell = Instantiate( _cellPrefab, transform );
         cell.Init( new ( x, y ) );
         _cellGrid.Set( x, y, cell );
+        cell.Clicked += _selectionManager.OnCellClick;
 
         SetCellPosition();
         void SetCellPosition( )
@@ -41,4 +43,5 @@ public class CellCreator : MonoBehaviour
     }
 
 }
+
 }

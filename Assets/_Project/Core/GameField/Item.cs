@@ -3,13 +3,13 @@
 namespace _Project.Core
 {
 [RequireComponent( typeof( ItemView ) )]
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IReleasable
 {
     [field: SerializeField] public ShapeType Shape { get; private set; }
     public bool CanBeMatchedWith( Item other ) => other && HasSameFlag( other );
     public bool HasSameFlag( Item other ) => Shape.ContainsAny( other.Shape );
 
-    public bool IsSameShape( Item other ) => other && Shape == other.Shape; //to ItemModel?
+    public bool IsSameShape( Item other ) => other && Shape == other.Shape;
 
     public Cell ParentCell { get; private set; }
 
@@ -47,9 +47,19 @@ public class Item : MonoBehaviour
     }
 
     public override string ToString( ) => GetName();
-
     string GetName( ) => $"{GetType().Name}, {Shape}";
 
-}
+    void IReleasable.OnRelease( )
+    {
+        View.PlayDestroyAnimation( OnAnimationFinish );
 
+    }
+
+    void OnAnimationFinish( )
+    {
+        gameObject.SetActive( false );
+        transform.parent = null;
+    }
+
+}
 }

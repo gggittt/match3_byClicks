@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project.Core.GameField.MatchCheck;
+using UnityEngine;
 using Zenject;
 
 namespace _Project.Core.Infrastructure
@@ -9,6 +10,7 @@ public class GameCoreInstaller : MonoInstaller
     [SerializeField] CellCreator _cellCreator;
     [SerializeField] Item _itemPrefab;
     [SerializeField] ItemShapesDrawer _itemShapesDrawer;
+    [SerializeField] Board _board;
 
     public override void InstallBindings( )
     {
@@ -17,9 +19,11 @@ public class GameCoreInstaller : MonoInstaller
 
         ObjectsPoolGeneric<Item> objectsPool = new(_itemPrefab, _gameData.BoardSize.x * _gameData.BoardSize.y);
         ItemFactory itemFactory = new(objectsPool, shapeTypes, _itemShapesDrawer);
-        Board board = new ( cellGrid, itemFactory );
+        MatchReaper matchReaper = new MatchReaper( cellGrid, _gameData, objectsPool );
+        MatchChecker matchChecker = new MatchChecker( _board.IsNeighborSameShape, matchReaper );
+        SelectionManager selectionManager = new SelectionManager( _board );
 
-        Container.BindInstances( _gameData, _cellCreator, cellGrid, objectsPool, itemFactory, board );
+        Container.BindInstances( _gameData, _cellCreator, cellGrid, objectsPool, itemFactory, _board, matchReaper, matchChecker, selectionManager );
 
     }
 
