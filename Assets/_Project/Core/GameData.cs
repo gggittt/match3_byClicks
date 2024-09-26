@@ -4,8 +4,10 @@ namespace _Project.Core
 {
 public class GameData : MonoBehaviour
 {
-    public Vector2Int BoardSize;
-    public ShapeType[] SpawnMoreOften;
+    [SerializeField]
+    [Range( 2, 40 )] int BoardWidth, BoardHeight;
+    public Vector2Int BoardSize => new Vector2Int( BoardWidth, BoardHeight );
+    public ShapeType ShapeTypes;
 
 }
 }

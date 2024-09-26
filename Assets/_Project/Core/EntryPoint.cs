@@ -6,10 +6,12 @@ namespace _Project.Core
 public class EntryPoint : MonoBehaviour
 {
     [Inject] CellCreator _cellCreator;
+    [Inject] Board _board;
 
     void Start( )
     {
         _cellCreator.CreateBoard();
+        _board.FillBoard();
     }
 
 }

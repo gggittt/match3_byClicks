@@ -24,7 +24,7 @@ public class CellCreator : MonoBehaviour
 
     void CreateTile( int x, int y, Vector3 cellLocalScale )
     {
-        Cell cell = Instantiate( _cellPrefab, transform ); //get from pool
+        Cell cell = Instantiate( _cellPrefab, transform );
         cell.Init( new ( x, y ) );
         _cellGrid.Set( x, y, cell );
 

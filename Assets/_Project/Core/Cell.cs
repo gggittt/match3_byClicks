@@ -6,11 +6,9 @@ namespace _Project.Core
 public class Cell : MonoBehaviour
 {
     public Vector2Int LocalCoord { get; private set; }
+    public Item Item { get; set; }
 
     public event System.Action<Cell> Clicked;
-    public event System.Action<Cell> Hovered;
-    public event System.Action<Cell> UnHovered;
-
 
     void OnMouseUpAsButton( )
     {
@@ -19,19 +17,6 @@ public class Cell : MonoBehaviour
         Clicked?.Invoke( this );
     }
 
-    void OnMouseEnter( )
-    {
-        Debug.Log( $"<color=cyan> {nameof( OnMouseEnter )} </color>" );
-
-        Hovered?.Invoke( this );
-    }
-
-    void OnMouseExit( )
-    {
-        Debug.Log( $"<color=cyan> {nameof( OnMouseExit )} </color>" );
-
-        UnHovered?.Invoke( this );
-    }
 
     public void Init( Vector2Int coords )
     {

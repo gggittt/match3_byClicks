@@ -6,13 +6,10 @@ using Sirenix.OdinInspector;
 
 namespace _Project.Core
 {
-
-[System.Serializable]
 public class ShapeTypes
 {
-    [ShowInInspector] List<ShapeType> _cantBeRandom = new() { ShapeType.None };
-
-    [ShowInInspector] List<ShapeType> _allowedToSpawnTypes;
+    readonly List<ShapeType> _cantBeRandom = new() { ShapeType.None };
+    readonly List<ShapeType> _allowedToSpawnTypes;
 
     public List<ShapeType> NotNoneTypes { get; private set; }
 
