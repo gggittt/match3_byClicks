@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.PersistentProgress
+namespace _Project.Core
 {
 public class GameData : MonoBehaviour
 {
     public Vector2Int BoardSize;
+    public ShapeType[] SpawnMoreOften;
+
 }
 }

@@ -1,20 +1,16 @@
-﻿using _Scripts.Field;
-using _Scripts.Field.Cells;
-using _Scripts.PersistentProgress;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace _Project.Core
 {
 public class CellCreator : MonoBehaviour
 {
+    [SerializeField] Cell _cellPrefab;
+
     [Inject] GameData _gameData;
     [Inject] CellGrid<Cell> _cellGrid;
 
-    [SerializeField] Cell _cellPrefab;
-
-    //start at top left position
-    public void CreateBoard( /*Vector2Int gridSize*/ )
+    public void CreateBoard( )
     {
         Vector2Int gridSize = _gameData.BoardSize;
         Vector3 cellLocalScale = _cellPrefab.transform.localScale;

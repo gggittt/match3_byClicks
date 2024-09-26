@@ -1,7 +1,6 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace _Scripts.Field.Cells
+namespace _Project.Core
 {
 [RequireComponent( typeof( SpriteRenderer ) )]
 public class Cell : MonoBehaviour

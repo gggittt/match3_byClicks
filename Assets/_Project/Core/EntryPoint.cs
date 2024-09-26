@@ -1,5 +1,4 @@
-﻿using _Scripts.Field.Cells;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace _Project.Core
@@ -14,4 +13,5 @@ public class EntryPoint : MonoBehaviour
     }
 
 }
+
 }
