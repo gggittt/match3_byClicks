@@ -7,15 +7,13 @@ using UnityEngine;
 [InitializeOnLoad]
 public static class HierarchyScriptDropHandler
 {
-
     static HierarchyScriptDropHandler( )
     {
-        // Debug.Log( $" {nameof( DragAndDrop.AddDropHandler )} implemented in versions unity >2021.2" );
+        // DragAndDrop.AddDropHandler implemented in unity versions  >2021.2
 
         DragAndDrop.AddDropHandler( OnScriptDropToHierarchy );
     }
 
-    //fixme если drag >=2 скриптов?
     static DragAndDropVisualMode OnScriptDropToHierarchy( int dropTargetInstanceID, HierarchyDropFlags dropMode, Transform parentForDraggedObjects, bool perform )
     {
         List<MonoScript> monoScripts = GetDraggedScripts();
