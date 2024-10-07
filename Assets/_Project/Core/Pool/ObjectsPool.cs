@@ -2,18 +2,16 @@
 using System.Linq;
 using UnityEngine;
 
-namespace _Project.Core
+namespace _Project.Core.Pool
 {
-public class ObjectsPoolGeneric<T>
+public class ObjectsPool<T>
     where T : MonoBehaviour, IReleasable
 {
     readonly Stack<T> _objects;
     readonly T _prefab;
 
-    public ObjectsPoolGeneric( T prefab, int prewarmObjectsAmount )
+    public ObjectsPool( T prefab, int prewarmObjectsAmount = 0 )
     {
-        Debug.Log($"<color=cyan> ctor {nameof( ObjectsPoolGeneric<T> )} </color>");
-
         _prefab = prefab;
         _objects = new Stack<T>();
 

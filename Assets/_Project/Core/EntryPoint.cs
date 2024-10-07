@@ -11,7 +11,7 @@ public class EntryPoint : MonoBehaviour
     void Start( )
     {
         _cellCreator.CreateBoard();
-        _board.FillBoard();
+        _board.PopulateBoard();
     }
 
 }

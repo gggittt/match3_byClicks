@@ -31,7 +31,7 @@ public class ItemView : MonoBehaviour
     public void PlayDestroyAnimation( TweenCallback onComplete )
     {
         Sequence sequence = DOTween.Sequence()
-           .SetEase( Ease.InOutSine ); //todo cash
+           .SetEase( Ease.InOutSine );
 
         transform.DOScale( 0, _disappearAnimationDuration );
 

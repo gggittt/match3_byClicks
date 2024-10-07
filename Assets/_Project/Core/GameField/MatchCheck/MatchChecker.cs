@@ -17,10 +17,12 @@ class MatchChecker
         _matchReaper = matchReaper;
     }
 
-    public void CheckAllDirectionsAtPoint( Vector2Int startPoint )
+    public MatchInfo HandleComboAtPoint( Vector2Int startPoint ) //CheckAllDirectionsAtPoint
     {
         MatchInfo matchInfo = CheckMatchAt( startPoint );
         _matchReaper.Reap( matchInfo );
+
+        return matchInfo;
     }
 
     MatchInfo CheckMatchAt( Vector2Int startPoint )

@@ -18,6 +18,11 @@ public static class VectorsExtensions
         return new Vector3( x ?? self.x, y ?? self.y, z ?? self.z );
     }
 
+    public static Vector2Int Add( this Vector2Int self, int? x = null, int? y = null )
+    {
+        return new Vector2Int( self.x + ( x ?? 0 ), self.y + ( y ?? 0 ));
+    }
+
     public static Vector3 Add( this Vector3 self, float? x = null, float? y = null, float? z = null )
     {
         return new Vector3( self.x + ( x ?? 0 ), self.y + ( y ?? 0 ), self.z + ( z ?? 0 ) );

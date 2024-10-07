@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _Project.Core.Pool;
 using UnityEngine;
 
 namespace _Project.Core.GameField.MatchCheck
@@ -7,9 +8,9 @@ public class MatchReaper //MatchCollector
 {
     readonly CellGrid<Cell> _cellGrid;
     readonly GameData _data;
-    readonly ObjectsPoolGeneric<Item> _objectsPool;
+    readonly ObjectsPool<Item> _objectsPool;
 
-    public MatchReaper( CellGrid<Cell> cellGrid, GameData data, ObjectsPoolGeneric<Item> objectsPool )
+    public MatchReaper( CellGrid<Cell> cellGrid, GameData data, ObjectsPool<Item> objectsPool )
     {
         _cellGrid = cellGrid;
         _data = data;
@@ -30,7 +31,6 @@ public class MatchReaper //MatchCollector
             _objectsPool.Release( item );
 
             _cellGrid.Get( element ).Item = null;
-            // _objectsPool.Release( item );
         }
 
         _data.AddBonusTurns( GetBonusTurnsFor( itemCount ) );
