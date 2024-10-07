@@ -24,7 +24,9 @@ public class MatchReaper //MatchCollector
 
         int itemCount = matchInfo.AllSuitableItems.Count;
         if ( itemCount < 1 )
+        {
             return;
+        }
 
         foreach ( Vector2Int element in matchInfo.AllSuitableItems )
         {

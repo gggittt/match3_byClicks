@@ -15,6 +15,11 @@ public class MatchInfo
         AllSuitableItems = new() { center };
     }
 
+    public void Add( Vector2Int coordinates )
+    {
+        AllSuitableItems.Add( coordinates );
+    }
+
     public void Add( HashSet<Vector2Int> coordinatesRange )
     {
         AllSuitableItems.UnionWith( coordinatesRange );
