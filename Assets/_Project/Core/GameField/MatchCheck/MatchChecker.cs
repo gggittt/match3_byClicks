@@ -6,21 +6,30 @@ using UnityEngine;
 
 namespace _Project.Core.GameField.MatchCheck
 {
-class MatchChecker
+public class MatchChecker
 {
     readonly Func<Vector2Int, Direction, bool> _isNeighborSameShape;
     readonly MatchReaper _matchReaper;
+    readonly GameData _gameData;
 
-    public MatchChecker( Func<Vector2Int, Direction, bool> isNeighborSameShape, MatchReaper matchReaper )
+    public MatchChecker( Func<Vector2Int, Direction, bool> isNeighborSameShape, MatchReaper matchReaper, GameData gameData )
     {
         _isNeighborSameShape = isNeighborSameShape;
         _matchReaper = matchReaper;
+        _gameData = gameData;
     }
 
-    public MatchInfo HandleComboAtPoint( Vector2Int startPoint ) //CheckAllDirectionsAtPoint
+    public MatchInfo HandleComboAtPoint( Vector2Int startPoint )
     {
-        MatchInfo matchInfo = GetMatchInLinesOfConsistentlySameShape( startPoint );
-        MatchInfo matchInfo2 = GetMatchOfAnyConnectedWithConsistentlySameShape( startPoint );
+        MatchInfo matchInfo = _gameData.MatchType switch
+        {
+            MatchCheckType.AllOrthogonalNeighbours =>
+                GetMatchOfAnyConnectedWithConsistentlySameShape( startPoint ),
+            MatchCheckType.OrthogonalNeighboursOnlyInLineInSameLineOrRow =>
+                GetMatchInLinesOfConsistentlySameShape( startPoint ),
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
         _matchReaper.Reap( matchInfo );
 
         return matchInfo;
@@ -33,7 +42,6 @@ class MatchChecker
         // ICollection<Vector2Int> suitableList = new List<Vector2Int>(); // мб сразу matchInfo.AllSuitableItems;
 
         AddNeighbourOfAnyConnectedWithConsistentlySameShape( startPoint, closedList, matchInfo );
-
 
         return matchInfo;
     }

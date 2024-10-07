@@ -24,7 +24,7 @@ public class GameCoreInstaller : MonoInstaller
         ObjectsPool<Item> objectsPool = new(_itemPrefab, _gameData.BoardSize.x * _gameData.BoardSize.y);
         ItemFactory itemFactory = new(objectsPool, shapeTypes, _itemShapesDrawer);
         MatchReaper matchReaper = new(cellGrid, _gameData, objectsPool);
-        MatchChecker matchChecker = new(_board.IsNeighborSameShape, matchReaper);
+        MatchChecker matchChecker = new(_board.IsNeighborSameShape, matchReaper, _gameData);
         SelectionManager selectionManager = new(_board);
 
         Container.BindInstances( _gameData, _cellCreator, cellGrid, objectsPool, itemFactory, _board, matchReaper, matchChecker );
