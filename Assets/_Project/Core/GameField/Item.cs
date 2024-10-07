@@ -11,7 +11,7 @@ public class Item : MonoBehaviour, IReleasable
 
     public bool IsSameShape( Item other ) => other && Shape == other.Shape;
 
-    public Cell ParentCell { get; private set; }
+    // public Cell ParentCell { get; private set; }
 
     public ItemView View { get; private set; }
     // public ItemMovement Movement { get; private set; }
@@ -28,7 +28,7 @@ public class Item : MonoBehaviour, IReleasable
 
     public void SetParentAndMoveToParent( Cell parent )
     {
-        ParentCell = parent;
+        // ParentCell = parent;
         transform.SetParent( parent.transform );
         transform.localPosition = Vector3.zero;
     }
@@ -52,7 +52,6 @@ public class Item : MonoBehaviour, IReleasable
     void IReleasable.OnRelease( )
     {
         View.PlayDestroyAnimation( OnAnimationFinish );
-
     }
 
     void OnAnimationFinish( )

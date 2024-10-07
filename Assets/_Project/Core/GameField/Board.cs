@@ -1,4 +1,8 @@
-﻿using _Project.Core.GameField.MatchCheck;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using _Project.Core.GameField;
+using _Project.Core.GameField.MatchCheck;
 using _Project.Extensions.UnityTypes;
 using UnityEngine;
 using Zenject;
@@ -59,18 +63,22 @@ public class Board : MonoBehaviour
 
     void TryMoveAllItemsDownByOneStep( )
     {
-        foreach ( Cell cell in _cellGrid.Cells )
+
+        for ( int i = _cellGrid.Cells.Length; i > 0; i-- )
         {
-            if ( cell.HasItem == false )
-                continue;
-
-            Cell upper = GetNeighbour( cell, Direction.Up );
-
-            if ( upper == null || upper.HasItem == false )
-                continue;
-
-            MoveItem( from: upper, Direction.Down );
+            // IEnumerable<Cell> enumerable = _cellGrid.Cells.Reverse();
+            Cell cell = _cellGrid.Cells[ i ];
+            TryPullUpperItem( cell );
         }
+
+        // foreach ( Cell cell in _cellGrid.Cells )
+        // {
+        //     if ( cell.HasItem == false )
+        //         continue;
+
+        //
+        //     MoveItem( from: upper, Direction.Down );
+        // }
 
         // while ( _cellGrid.Get( coordinate ).Empty )
         /*  foreach ( Vector2Int coordinate in matchInfo.AllSuitableItems
@@ -82,12 +90,25 @@ public class Board : MonoBehaviour
          */
     }
 
-    void MoveItem( Cell from, Direction direction )
+    void TryPullUpperItem( Cell cell )
     {
-        // from.Item.Move
-        Debug.Log( $"<color=cyan> {234} </color>" );
+        if ( cell.HasItem )
+            return;
 
+        Cell upper = GetNeighbour( cell, Direction.Up );
+
+        if ( upper == null || upper.HasItem == false )
+            return;
+
+        SwitchItems( cell, upper );
     }
+
+    void SwitchItems( Cell cell, Cell other )
+    {
+        ( cell.Item, other.Item ) = ( other.Item, cell.Item );
+        //item.Cell =
+    }
+
 
     public Cell GetNeighbour( Cell origin, Direction direction )
     {
@@ -101,38 +122,10 @@ public class Board : MonoBehaviour
         return null;
     }
 
-    Vector2Int GetLocalCoordinateOfTopColumnCell( Vector2Int coordinate )
-    {
-        while ( coordinate.y > 0 )
-        {
-            if ( IsYInBoundsAndEmpty( coordinate ) )
-                coordinate.y++;
-            else
-                break;
-        }
-
-        return coordinate;
-    }
-
-    Vector2Int GetLocalCoordinateOfBottom( Vector2Int coordinate )
-    {
-        while ( coordinate.y > 0 )
-        {
-            if ( IsYInBoundsAndEmpty( coordinate ) )
-                coordinate.y--;
-            else
-                break;
-        }
-
-        return coordinate;
-    }
-
     bool IsYInBoundsAndEmpty( Vector2Int coordinate )
     {
         return _cellGrid.IsYInBounds( coordinate.y ) && _cellGrid.Get( coordinate ).Empty;
     }
-
-
 
 }
 

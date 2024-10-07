@@ -1,9 +1,8 @@
 ﻿using _Project.Core.Pool;
-using Zenject;
 
-namespace _Project.Core
+namespace _Project.Core.GameField
 {
-class ItemFactory
+public class ItemFactory
 {
     readonly ObjectsPool<Item> _objectsPool;
     readonly ShapeTypes _shapeTypes;
