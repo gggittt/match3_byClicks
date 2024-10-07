@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Core.GameField;
+using _Project.Core.GameField.FieldItems;
 using _Project.Core.GameField.MatchCheck;
 using _Project.Extensions.UnityTypes;
 using UnityEngine;
@@ -28,7 +29,6 @@ public class Board : MonoBehaviour
         foreach ( Cell cell in _cellGrid.Cells )
         {
             Item item = _itemFactory.CreateItem( cell );
-            item.transform.parent = cell.transform;
         }
     }
 
@@ -41,44 +41,36 @@ public class Board : MonoBehaviour
             return false;
         }
 
-        Item item = _cellGrid.Get( origin ).Item;
-        Item neighbourItem = _cellGrid.Get( neighbourCoords ).Item;
+        Item item = _cellGrid.TryGet( origin ).Item;
+        Item neighbourItem = _cellGrid.TryGet( neighbourCoords ).Item;
 
         return item.CanBeMatchedWith( neighbourItem );
     }
 
     void MoveAllItemsDownAndFillEmptySpots( MatchInfo matchInfo )
     {
-        foreach ( Vector2Int coordinate in matchInfo.AllSuitableItems )
+        for ( int i = 0; i < matchInfo.ItemsCount; i++ ) //fix to more optimized
         {
             TryMoveAllItemsDownByOneStep();
+        }
 
-            Cell cell = _cellGrid.Get( coordinate );
-            Item item = _itemFactory.CreateItem( cell );
-            // item.View.MoveDownWhileBottomIsEmpty();
-
-            item.transform.parent = cell.transform;
+        for ( int i = 0; i < _cellGrid.Count; i++ ) //fix to more optimized
+        {
+            Cell cell = _cellGrid.TryGet( i );
+            if ( cell.HasItem == false )
+            {
+                _itemFactory.CreateItem( cell );
+            }
         }
     }
 
     void TryMoveAllItemsDownByOneStep( )
     {
-
-        for ( int i = _cellGrid.Cells.Length; i > 0; i-- )
+        for ( int i = _cellGrid.Count - 1; i >= 0; i-- )
         {
-            // IEnumerable<Cell> enumerable = _cellGrid.Cells.Reverse();
-            Cell cell = _cellGrid.Cells[ i ];
+            Cell cell = _cellGrid.TryGet( i );
             TryPullUpperItem( cell );
         }
-
-        // foreach ( Cell cell in _cellGrid.Cells )
-        // {
-        //     if ( cell.HasItem == false )
-        //         continue;
-
-        //
-        //     MoveItem( from: upper, Direction.Down );
-        // }
 
         // while ( _cellGrid.Get( coordinate ).Empty )
         /*  foreach ( Vector2Int coordinate in matchInfo.AllSuitableItems
@@ -92,7 +84,7 @@ public class Board : MonoBehaviour
 
     void TryPullUpperItem( Cell cell )
     {
-        if ( cell.HasItem )
+        if ( cell == null || cell.HasItem )
             return;
 
         Cell upper = GetNeighbour( cell, Direction.Up );
@@ -106,27 +98,30 @@ public class Board : MonoBehaviour
     void SwitchItems( Cell cell, Cell other )
     {
         ( cell.Item, other.Item ) = ( other.Item, cell.Item );
+
+        TryMoveAssignedItemToCell( cell );
+        TryMoveAssignedItemToCell( other );
+    }
+
+    void TryMoveAssignedItemToCell( Cell cell )
+    {
+        if ( cell.Item != null )
+            cell.Item.Movement.Move( cell.transform.position );
+
         //item.Cell =
     }
 
-
-    public Cell GetNeighbour( Cell origin, Direction direction )
+    Cell GetNeighbour( Cell origin, Direction direction )
     {
         Vector2Int neighbourCoordinate = origin.LocalCoord + direction;
 
         if ( _cellGrid.IsInBounds( neighbourCoordinate ) )
         {
-            return _cellGrid.Get( neighbourCoordinate );
+            return _cellGrid.TryGet( neighbourCoordinate );
         }
 
         return null;
     }
-
-    bool IsYInBoundsAndEmpty( Vector2Int coordinate )
-    {
-        return _cellGrid.IsYInBounds( coordinate.y ) && _cellGrid.Get( coordinate ).Empty;
-    }
-
 }
 
 }

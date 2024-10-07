@@ -5,9 +5,11 @@ namespace _Project.Core.GameField.MatchCheck
 public class Direction
 {
 
-    public static readonly Direction Up = new Direction( 0, 1 ) ;
+    const int UpIsDown = -1;
+
+    public static readonly Direction Up = new Direction( 0, 1 ) * UpIsDown ;
     public static readonly Direction Right = new Direction( 1, 0 );
-    public static readonly Direction Down = new Direction( 0, - 1 ) ;
+    public static readonly Direction Down = new Direction( 0, - 1 )  * UpIsDown;
     public static readonly Direction Left = new Direction( - 1, 0 );
 
     public static readonly Direction UpRight = Up + Right;

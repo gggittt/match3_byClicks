@@ -1,4 +1,5 @@
-﻿using _Project.Core.Pool;
+﻿using _Project.Core.GameField.FieldItems;
+using _Project.Core.Pool;
 
 namespace _Project.Core.GameField
 {
@@ -20,6 +21,7 @@ public class ItemFactory
         Item item = _objectsPool.Get();
         ShapeType randomShape = _shapeTypes.RandomAllowedToSpawnType;
         item.Init( randomShape, cell.transform.position );
+        item.View.PlayAppearAnimation();
 
         _itemShapesDrawer.SetSprite( randomShape, item.View.SpriteRenderer );
 
@@ -31,7 +33,7 @@ public class ItemFactory
     void PutItemToCell( Cell cell, Item item )
     {
         cell.Item = item;
-        // item.transform.parent = cell.transform;
+        item.transform.parent = cell.transform;
     }
 }
 }

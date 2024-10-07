@@ -1,5 +1,7 @@
 ﻿using _Project.Core.GameField;
+using _Project.Core.GameField.FieldItems;
 using _Project.Core.GameField.MatchCheck;
+using _Project.Core.Input;
 using _Project.Core.Pool;
 using UnityEngine;
 using Zenject;
@@ -21,11 +23,13 @@ public class GameCoreInstaller : MonoInstaller
 
         ObjectsPool<Item> objectsPool = new(_itemPrefab, _gameData.BoardSize.x * _gameData.BoardSize.y);
         ItemFactory itemFactory = new(objectsPool, shapeTypes, _itemShapesDrawer);
-        MatchReaper matchReaper = new( cellGrid, _gameData, objectsPool );
-        MatchChecker matchChecker = new( _board.IsNeighborSameShape, matchReaper );
-        SelectionManager selectionManager = new( _board );
+        MatchReaper matchReaper = new(cellGrid, _gameData, objectsPool);
+        MatchChecker matchChecker = new(_board.IsNeighborSameShape, matchReaper);
+        SelectionManager selectionManager = new(_board);
 
-        Container.BindInstances( _gameData, _cellCreator, cellGrid, objectsPool, itemFactory, _board, matchReaper, matchChecker, selectionManager );
+        Container.BindInstances( _gameData, _cellCreator, cellGrid, objectsPool, itemFactory, _board, matchReaper, matchChecker );
+        Container.BindInterfacesAndSelfTo<SelectionManager>()
+           .FromInstance( selectionManager );
 
     }
 

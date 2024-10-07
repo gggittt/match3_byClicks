@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Project.Core
+namespace _Project.Core.GameField.FieldItems
 {
 [RequireComponent( typeof( ItemView ) )]
 public class Item : MonoBehaviour, IReleasable
@@ -14,7 +14,7 @@ public class Item : MonoBehaviour, IReleasable
     // public Cell ParentCell { get; private set; }
 
     public ItemView View { get; private set; }
-    // public ItemMovement Movement { get; private set; }
+    public ItemMovement Movement { get; private set; }
 
     public void Init( ShapeType shapeType, Vector3 position )
     {
@@ -42,8 +42,8 @@ public class Item : MonoBehaviour, IReleasable
     {
         if ( !View )
             View = GetComponent<ItemView>();
-        // if ( !Movement )
-        //     Movement = GetComponent<ItemMovement>();
+        if ( !Movement )
+            Movement = GetComponent<ItemMovement>();
     }
 
     public override string ToString( ) => GetName();

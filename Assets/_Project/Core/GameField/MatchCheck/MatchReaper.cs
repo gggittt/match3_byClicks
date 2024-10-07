@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _Project.Core.GameField.FieldItems;
 using _Project.Core.Pool;
 using UnityEngine;
 
@@ -27,10 +28,10 @@ public class MatchReaper //MatchCollector
 
         foreach ( Vector2Int element in matchInfo.AllSuitableItems )
         {
-            Item item = _cellGrid.Get( element ).Item;
+            Item item = _cellGrid.TryGet( element ).Item;
             _objectsPool.Release( item );
 
-            _cellGrid.Get( element ).Item = null;
+            _cellGrid.TryGet( element ).Item = null;
         }
 
         _data.AddBonusTurns( GetBonusTurnsFor( itemCount ) );

@@ -8,6 +8,7 @@ public class MatchInfo
 {
     public HashSet<Vector2Int> AllSuitableItems { get; }
     public bool HasMatch => AllSuitableItems.Any();
+    public int ItemsCount => AllSuitableItems.Count;
 
     public MatchInfo( Vector2Int center )
     {

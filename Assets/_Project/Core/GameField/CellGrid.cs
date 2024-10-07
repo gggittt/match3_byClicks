@@ -7,6 +7,7 @@ namespace _Project.Core
 public class CellGrid<TCell>
 {
     public TCell[] Cells { get; }
+    public int Count => Cells.Length;
     public int Width { get; }
     public int Height { get; }
 
@@ -56,6 +57,16 @@ public class CellGrid<TCell>
     public void Set( int index, TCell value ) =>
         Cells[ index ] = value;
 
+    public TCell TryGet( int index )
+    {
+        if ( index <= Count )
+        {
+            return Get( index );
+        }
+
+        throw new IndexOutOfRangeException();
+    }
+
     public TCell TryGet( Vector2Int coords )
     {
         if ( IsXInBounds( coords.x ) == false )
@@ -72,17 +83,30 @@ public class CellGrid<TCell>
         return Get( index );
     }
 
-    public TCell Get( int index ) =>
-        Cells[ index ];
+    TCell Get( int index )
+    {
+        TCell cell;
+        try
+        {
+            cell = Cells[ index ];
 
-    public TCell Get( Vector2Int coords ) =>
+        } catch (Exception e)
+        {
+            Debug.Log( e );
+            throw;
+        }
+
+        return cell;
+    }
+
+    TCell Get( Vector2Int coords ) =>
         TryGet( coords );
 
-    public bool IsXInBounds( int pos ) =>
-        ( pos >= 0 && pos < Width );
+    public bool IsXInBounds( int xIndex ) =>
+        ( xIndex >= 0 && xIndex < Width );
 
-    public bool IsYInBounds( int pos ) =>
-        ( pos >= 0 && pos < Height );
+    public bool IsYInBounds( int yIndex ) =>
+        ( yIndex >= 0 && yIndex < Height );
 
     public bool IsInBounds( Vector2Int coords ) =>
         IsXInBounds( coords.x ) && IsYInBounds( coords.y );
@@ -92,7 +116,7 @@ public class CellGrid<TCell>
         int i = Array.IndexOf( Cells, value );
         if ( i == - 1 )
         {
-            throw new ArgumentException();
+            throw new ArgumentException( "cell not found in grid" );
         }
 
         return IndexToCoords( i );
