@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace _Scripts.HUD
+namespace _Project.Core
 {
 public class TurnsView : MonoBehaviour
 {

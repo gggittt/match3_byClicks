@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace _Project.Core.Menus
+namespace _Project.Core.Buttons
 {
 public class LeaderboardButton : MonoBehaviour
 {

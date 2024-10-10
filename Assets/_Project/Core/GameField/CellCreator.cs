@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Core
+namespace _Project.Core.GameField
 {
 public class CellCreator : MonoBehaviour
 {

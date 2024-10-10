@@ -1,8 +1,7 @@
 ﻿using _Project.Core.GameField.FieldItems;
-using _Project.Core.GameField.MatchCheck;
 using UnityEngine;
 
-namespace _Project.Core
+namespace _Project.Core.GameField
 {
 [RequireComponent( typeof( SpriteRenderer ) )]
 public class Cell : MonoBehaviour

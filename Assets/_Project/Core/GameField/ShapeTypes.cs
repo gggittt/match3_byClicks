@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Extensions.Enumerable;
-using Sirenix.OdinInspector;
 
-namespace _Project.Core
+namespace _Project.Core.GameField
 {
 public class ShapeTypes
 {

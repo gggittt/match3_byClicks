@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Project.Core.GameField.MatchCheck
+namespace _Project.Core.GameField
 {
 public class Direction
 {

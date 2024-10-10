@@ -2,6 +2,8 @@
 using System.Linq;
 using UnityEngine;
 
+namespace _Project.Core
+{
 [System.Serializable]
 public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
 {
@@ -94,4 +96,5 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
         public static implicit operator KeyValuePair<TypeKey, TypeValue>( SerializedDictionaryKVPProps<TypeKey, TypeValue> kvp )
             => new KeyValuePair<TypeKey, TypeValue>( kvp.Key, kvp.Value );
     }
+}
 }

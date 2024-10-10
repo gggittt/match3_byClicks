@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using _Project.Core.GameField;
-using _Project.Core.GameField.FieldItems;
+﻿using _Project.Core.GameField.FieldItems;
 using _Project.Core.GameField.MatchCheck;
-using _Project.Extensions.UnityTypes;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Core
+namespace _Project.Core.GameField
 {
 public class Board : MonoBehaviour
 {

@@ -1,4 +1,4 @@
-namespace _Project.Core
+namespace _Project.Core.Pool
 {
 public interface IReleasable
 {

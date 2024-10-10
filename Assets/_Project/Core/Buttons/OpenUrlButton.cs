@@ -1,8 +1,7 @@
-﻿using _Project.Core.Infrastructure.GameStateMachine.States;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Core.Menus
+namespace _Project.Core.Buttons
 {
 public class OpenUrlButton : MonoBehaviour
 {

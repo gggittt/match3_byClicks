@@ -4,8 +4,8 @@ public interface IEnterableState : IExcitableState
 {
     public void Enter( );
 }
-// public interface IPayloadEnterableState<TPayload> : IExcitableState
-// {
-//     public void Enter( TPayload payload );
-// }
+public interface IPayloadEnterableState : IExcitableState
+{
+    public void Enter<TPayload>( TPayload payload );
+}
 }

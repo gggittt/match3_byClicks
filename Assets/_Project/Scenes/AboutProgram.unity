@@ -1179,7 +1179,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5749045786006748003, guid: aeddb5847fa60ac4caf1900f4d2c27dc, type: 3}
       propertyPath: _url
-      value: https://github.com/gggittt?tab=repositories
+      value: https://github.com/gggittt
       objectReference: {fileID: 0}
     - target: {fileID: 2896096921596590713, guid: aeddb5847fa60ac4caf1900f4d2c27dc, type: 3}
       propertyPath: m_Sprite

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _Project.Core
+namespace _Project.Core.GameField
 {
 public static class ShapeExtensions
 {

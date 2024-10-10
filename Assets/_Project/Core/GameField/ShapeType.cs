@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _Project.Core
+namespace _Project.Core.GameField
 {
 [Flags]
 public enum ShapeType //Not "ColorType" because could be redCandy, redCookie, ... - it's not color, but shapeType / itemType

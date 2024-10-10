@@ -1,7 +1,5 @@
 ﻿
-using _Project.Core.Infrastructure.GameStateMachine.States.FSNStatesContracts;
-
-namespace _Project.Core.Infrastructure.GameStateMachine.States
+namespace _Project.Core.Infrastructure.GameStateMachine.States.FSNStatesContracts
 {
 //тогда теряю смысл обоих интерфейсов!
 //в IPayloadEnterableState<TPayload> смысл в получении имени следующей сцены

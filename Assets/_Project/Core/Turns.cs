@@ -1,9 +1,6 @@
-﻿using System;
-using _Scripts.HUD;
-using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace _Scripts.PersistentProgress
+namespace _Project.Core
 {
 public class Turns : MonoBehaviour
 {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.Core
+namespace _Project.Core.GameField
 {
 public class CellGrid<TCell>
 {
