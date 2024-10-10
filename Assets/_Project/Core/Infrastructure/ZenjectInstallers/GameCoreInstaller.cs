@@ -6,7 +6,7 @@ using _Project.Core.Pool;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Core.Infrastructure
+namespace _Project.Core.Infrastructure.ZenjectInstallers
 {
 public class GameCoreInstaller : MonoInstaller
 {
@@ -28,8 +28,13 @@ public class GameCoreInstaller : MonoInstaller
         SelectionManager selectionManager = new(_board);
 
         Container.BindInstances( _gameData, _cellCreator, cellGrid, objectsPool, itemFactory, _board, matchReaper, matchChecker );
-        Container.BindInterfacesAndSelfTo<SelectionManager>()
+
+        Container
+           .BindInterfacesAndSelfTo<SelectionManager>()
            .FromInstance( selectionManager );
+
+
+
 
     }
 
