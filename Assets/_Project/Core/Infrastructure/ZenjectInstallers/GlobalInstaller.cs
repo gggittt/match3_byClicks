@@ -23,12 +23,4 @@ public class GlobalInstaller : MonoInstaller, ICoroutineRunner
     }
 }
 
-public static class ZenjectDiContainerExtensions
-{
-    public static void BindInterfacesAndSelfAsSingleTo<T>( this DiContainer Container )
-    {
-        Container.BindInterfacesAndSelfTo<T>()
-           .AsSingle();
-    }
-}
 }

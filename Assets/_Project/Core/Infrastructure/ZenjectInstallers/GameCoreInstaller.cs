@@ -32,8 +32,9 @@ public class GameCoreInstaller : MonoInstaller
         Container
            .BindInterfacesAndSelfTo<SelectionManager>()
            .FromInstance( selectionManager )
-           .AsSingle()
-            ;
+           .AsSingle();
+
+
 
     }
 }
