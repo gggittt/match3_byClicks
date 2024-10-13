@@ -5,7 +5,7 @@
 
 ## В коде точка входа: 
   1) [_Project/Core/Infrastructure/Bootstrapper.cs](https://github.com/gggittt/match3_byClicks/blob/main/Assets/_Project/Core/Infrastructure/Bootstrapper.cs)
-  2) далле на геймплей сцене: [_Project/Core/EntryPointGameplay.cs](https://github.com/gggittt/match3_byClicks/blob/main/Assets/_Project/Core/EntryPointGameplay.cs)
+  2) далее на геймплей сцене: [_Project/Core/EntryPointGameplay.cs](https://github.com/gggittt/match3_byClicks/blob/main/Assets/_Project/Core/EntryPointGameplay.cs)
 
 ## Game rules
 match3 in unity. Initially planning feature not merge items, but click on them
