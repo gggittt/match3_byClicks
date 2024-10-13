@@ -57,6 +57,7 @@ https://github.com/user-attachments/assets/72bb1baa-8e84-4570-87d2-4ba62ee23ed5
   настраивается здесь:
   - ![image](https://github.com/user-attachments/assets/f30c82c2-1481-474f-85e8-2c03fae9bd2c)
 - consts - PascalCase, even for private and local. Не вижу смысла в SNAKE_CASE, это просто замедляет печать. ![image](https://github.com/user-attachments/assets/4da2d2ed-2648-4eae-aeed-97b34347e98c)
+<!-- - [Inject] в поля, не только в Construct() -->
 
 - в остальном +- стандартно.
   - Возможно позже перейду с ```ctor(int some){ _some = some; }``` to ```ctor(int some){ this.some = some; }```
