@@ -7,26 +7,16 @@ namespace _Project.Core.Infrastructure.GameStateMachine
 {
 public class StateMachine : IGameStateMachine
 {
-    readonly Dictionary<Type, IExcitableState> _states = new Dictionary<Type, IExcitableState>(  );
+    readonly Dictionary<Type, IExcitableState> _states = new();
 
     IExcitableState _currentState;
-
-    // [Inject] void Construct( IEnterableState[] states )
-    // {
-    //     // _states = new Dictionary<Type, IExcitableState>(  );
-    //     foreach ( IEnterableState state in states )
-    //     {
-    //         Register( state );
-    //     }
-    // }
 
     public void Register( IExcitableState state )
     {
         _states.Add( state.GetType(), state );
     }
 
-    public void Enter<TState>( )
-        where TState : IExcitableState
+    public void Enter<TState>( ) where TState : IExcitableState
     {
         TryExitPrevious();
 
@@ -43,8 +33,7 @@ public class StateMachine : IGameStateMachine
         }
     }
 
-    void SetNew<TState>( )
-        where TState : IExcitableState
+    void SetNew<TState>( ) where TState : IExcitableState
     {
         TState newState = Get<TState>();
         _currentState = newState;
@@ -58,8 +47,7 @@ public class StateMachine : IGameStateMachine
         }
     }
 
-    TState Get<TState>( )
-        where TState : IExcitableState
+    TState Get<TState>( ) where TState : IExcitableState
     {
         return (TState) _states[ typeof( TState ) ];
     }
