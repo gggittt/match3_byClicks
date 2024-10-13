@@ -49,7 +49,19 @@ public class StateMachine : IGameStateMachine
 
     TState Get<TState>( ) where TState : IExcitableState
     {
-        return (TState) _states[ typeof( TState ) ];
+        TState excitableState;
+        try
+        {
+            excitableState = (TState) _states[ typeof( TState ) ];
+
+        } catch (Exception e)
+        {
+            UnityEngine.Debug.Log( $"<color=green> Probably launched from wrong scene. Need to start from Bootstrap </color>" );
+
+            throw e;
+        }
+
+        return excitableState;
     }
 
 }

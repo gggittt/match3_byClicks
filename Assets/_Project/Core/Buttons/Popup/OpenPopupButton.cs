@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Core.Buttons
+namespace _Project.Core.Buttons.Popup
 {
 public class OpenPopupButton : MonoBehaviour
 {

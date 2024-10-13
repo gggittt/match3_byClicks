@@ -1,5 +1,6 @@
 ﻿using _Project.Core.Infrastructure.GameStateMachine;
 using _Project.Core.Infrastructure.GameStateMachine.States;
+using _Project.Core.Infrastructure.GameStateMachine.States.LoadScene;
 using UnityEngine;
 using Zenject;
 

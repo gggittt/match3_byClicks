@@ -1,4 +1,5 @@
 using _Project.Core.Infrastructure.GameStateMachine.States.FSNStatesContracts;
+using _Project.Core.Infrastructure.GameStateMachine.States.LoadScene;
 using Zenject;
 
 namespace _Project.Core.Infrastructure.GameStateMachine.States
