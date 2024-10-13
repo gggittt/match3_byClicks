@@ -44,12 +44,15 @@ public class GameCoreInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<MatchChecker>()
            .AsSingle();
 
+        Container.BindInterfacesAndSelfTo<SelectionManager>()
+           .AsSingle();
+        Container.BindInterfacesAndSelfTo<GameOver>()
+           .AsSingle();
+
         Container.BindInterfacesAndSelfAsSingleFromInstance( _gameData );
         Container.BindInterfacesAndSelfAsSingleFromInstance( _cellCreator );
         Container.BindInterfacesAndSelfAsSingleFromInstance( _board );
         Container.BindInterfacesAndSelfAsSingleFromInstance( _turns );
-        Container.BindInterfacesAndSelfAsSingleFromInstance( new SelectionManager( _board ) );
     }
 }
-
 }

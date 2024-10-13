@@ -8,7 +8,8 @@ namespace _Project.Core.Pool.ToolbarButtons
 [InitializeOnLoad]
 public class ToolbarLeftButtons
 {
-    static readonly GUIContent _btn1 = new GUIContent( "boot", "Launch from Bootstrap scene" );
+    static readonly GUIContent _bootBtn = new GUIContent( "boot", "Launch from Bootstrap scene" );
+    static readonly GUIContent _gameBtn = new GUIContent( "game", "Launch from Gameplay scene" );
 
     static ToolbarLeftButtons( )
     {
@@ -19,8 +20,14 @@ public class ToolbarLeftButtons
     {
         GUILayout.FlexibleSpace();
 
-        if ( GUILayout.Button( _btn1, ToolbarStyles.CommandButtonStyle ) )
+        if ( GUILayout.Button( _bootBtn, ToolbarStyles.CommandButtonStyle ) )
             SceneHelper.StartScene( "Bootstrap" );
+
+        if ( GUILayout.Button( _gameBtn, ToolbarStyles.CommandButtonStyle ) )
+        {
+            SceneHelper.StartScene( "Gameplay" );
+            Debug.LogWarning( $"<color=orange> loaded without ProjectContext! </color>" );
+        }
     }
 }
 }
