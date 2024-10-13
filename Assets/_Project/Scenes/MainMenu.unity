@@ -1191,13 +1191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37db7c825e40458d8bd1bd25d07111dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _csvFile: {fileID: 0}
-  _textAsset: {fileID: 0}
-  _yourFileCsv: fromLibre.csv
-  _folderPath: 
+  _textAsset: {fileID: 4900000, guid: 95f302c04669efd41bf33431e5a88c66, type: 3}
   _tableStringSeparator: \
   _tableCellSeparator: ','
-  _resourcesToLoad: fromLibre
 --- !u!4 &2140533476
 Transform:
   m_ObjectHideFlags: 0
