@@ -10,13 +10,14 @@ public class Board : MonoBehaviour
     [Inject] CellGrid<Cell> _cellGrid;
     [Inject] ItemFactory _itemFactory;
     [Inject] MatchChecker _matchChecker;
-    [Inject] GameData _gameData;
+    [Inject] Turns _turns;
 
     public void HandleClick( Cell cell )
     {
         MatchInfo matchInfo = _matchChecker.HandleComboAtPoint( cell.LocalCoord );
 
         MoveAllItemsDownAndFillEmptySpots( matchInfo );
+        _turns.SpendOne();
     }
 
     public void PopulateBoard( ) //override all items, if they were
@@ -66,15 +67,6 @@ public class Board : MonoBehaviour
             Cell cell = _cellGrid.TryGet( i );
             TryPullUpperItem( cell );
         }
-
-        // while ( _cellGrid.Get( coordinate ).Empty )
-        /*  foreach ( Vector2Int coordinate in matchInfo.AllSuitableItems
-            1. shift all upper down
-                    if they exist, мб весь ряд удалён
-
-            2. get all empty spot вверху
-            3. foreach.create new дальше можно даже без анимации создать?
-         */
     }
 
     void TryPullUpperItem( Cell cell )

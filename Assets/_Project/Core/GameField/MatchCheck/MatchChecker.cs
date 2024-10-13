@@ -8,16 +8,23 @@ namespace _Project.Core.GameField.MatchCheck
 {
 public class MatchChecker
 {
-    readonly Func<Vector2Int, Direction, bool> _isNeighborSameShape;
+    // readonly Func<Vector2Int, Direction, bool> _isNeighborSameShape;
+    Board _board;
     readonly MatchReaper _matchReaper;
     readonly GameData _gameData;
 
-    public MatchChecker( Func<Vector2Int, Direction, bool> isNeighborSameShape, MatchReaper matchReaper, GameData gameData )
+    public MatchChecker( Board board, MatchReaper matchReaper, GameData gameData )
     {
-        _isNeighborSameShape = isNeighborSameShape;
+        _board = board;
         _matchReaper = matchReaper;
         _gameData = gameData;
     }
+    // public MatchChecker( Func<Vector2Int, Direction, bool> isNeighborSameShape, MatchReaper matchReaper, GameData gameData )
+    // {
+    //     _isNeighborSameShape = isNeighborSameShape;
+    //     _matchReaper = matchReaper;
+    //     _gameData = gameData;
+    // }
 
     public MatchInfo HandleComboAtPoint( Vector2Int startPoint )
     {
@@ -57,7 +64,8 @@ public class MatchChecker
                 continue;
             }
 
-            bool isNeighborSuitable = _isNeighborSameShape( coords, direction );
+            bool isNeighborSuitable = _board.IsNeighborSameShape( coords, direction );
+            // bool isNeighborSuitable = _isNeighborSameShape( coords, direction );
 
             closedList.Add( current );
 
@@ -100,16 +108,17 @@ public class MatchChecker
         return suitableInHalfLine;
     }
 
-    void AddAllSuitableInLine( Vector2Int origin, Direction direction, ICollection<Vector2Int> suitableLine )
+    void AddAllSuitableInLine( Vector2Int coords, Direction direction, ICollection<Vector2Int> suitableLine )
     {
-        bool isNeighborSuitable = _isNeighborSameShape( origin, direction );
+        // bool isNeighborSuitable = _isNeighborSameShape( coords, direction );
+        bool isNeighborSuitable = _board.IsNeighborSameShape( coords, direction );
 
         if ( isNeighborSuitable == false )
         {
             return;
         }
 
-        Vector2Int neighbour = origin + direction;
+        Vector2Int neighbour = coords + direction;
 
         suitableLine.Add( neighbour );
         AddAllSuitableInLine( neighbour, direction, suitableLine );

@@ -7,7 +7,7 @@ class SelectionManager
 {
     readonly Board _board;
     float _previousClickTime;
-    float _pauseBetweenClicks = 0.7f;
+    float _pauseBetweenClicks = 0.25f;
 
     public SelectionManager( Board board ) =>
         _board = board;

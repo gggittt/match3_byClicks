@@ -14,13 +14,9 @@ public class GameData : MonoBehaviour
     [SerializeField] MatchCheckType _matchType = MatchCheckType.AllOrthogonalNeighbours;
     public MatchCheckType MatchType  => _matchType;
 
-    [SerializeField] Turns _turns;
     public ShapeType ShapeTypes;
 
-    public void AddBonusTurns( int amount )
-    {
-        _turns.Add( amount );
-    }
+
 }
 
 }

@@ -2,21 +2,27 @@
 using _Project.Core.GameField.FieldItems;
 using _Project.Core.Pool;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Core.GameField.MatchCheck
 {
 public class MatchReaper //MatchCollector
 {
-    readonly CellGrid<Cell> _cellGrid;
-    readonly GameData _data;
-    readonly ObjectsPool<Item> _objectsPool;
+    [Inject] CellGrid<Cell> _cellGrid;
+    [Inject] ObjectsPool<Item> _objectsPool;
+    [Inject] Turns _turns;
 
-    public MatchReaper( CellGrid<Cell> cellGrid, GameData data, ObjectsPool<Item> objectsPool )
-    {
-        _cellGrid = cellGrid;
-        _data = data;
-        _objectsPool = objectsPool;
-    }
+    // public MatchReaper( CellGrid<Cell> cellGrid, Turns turns, ObjectsPool<Item> objectsPool )
+    // {
+    //     _cellGrid = cellGrid;
+    //     _turns = turns;
+    //     _objectsPool = objectsPool;
+    // }
+
+    // public MatchReaper( Turns turns )
+    // {
+    //     _turns = turns;
+    // }
 
     public void Reap( MatchInfo matchInfo )
     {
@@ -36,7 +42,7 @@ public class MatchReaper //MatchCollector
             _cellGrid.TryGet( element ).Item = null;
         }
 
-        _data.AddBonusTurns( GetBonusTurnsFor( itemCount ) );
+        _turns.Add(  GetBonusTurnsFor( itemCount ) );
     }
 
     int GetBonusTurnsFor( int itemCount )

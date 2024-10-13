@@ -1,8 +1,11 @@
-﻿using _Project.Core.GameField;
+﻿using System.Diagnostics.CodeAnalysis;
+using _Project._Debug;
+using _Project.Core.GameField;
 using _Project.Core.GameField.FieldItems;
 using _Project.Core.GameField.MatchCheck;
 using _Project.Core.Input;
 using _Project.Core.Pool;
+using _Project.Extensions.Zenject;
 using UnityEngine;
 using Zenject;
 
@@ -15,27 +18,38 @@ public class GameCoreInstaller : MonoInstaller
     [SerializeField] Item _itemPrefab;
     [SerializeField] ItemShapesDrawer _itemShapesDrawer;
     [SerializeField] Board _board;
+    [SerializeField] Turns _turns;
 
     public override void InstallBindings( )
     {
-        CellGrid<Cell> cellGrid = new(_gameData.BoardSize);
-        ShapeTypes shapeTypes = new(_gameData.ShapeTypes);
+        Container.BindInterfacesAndSelfTo<CellGrid<Cell>>()
+           .AsSingle()
+           .WithArguments( _gameData.BoardSize );
 
-        ObjectsPool<Item> objectsPool = new(_itemPrefab, _gameData.BoardSize.x * _gameData.BoardSize.y);
-        ItemFactory itemFactory = new(objectsPool, shapeTypes, _itemShapesDrawer);
-        MatchReaper matchReaper = new(cellGrid, _gameData, objectsPool);
-        MatchChecker matchChecker = new(_board.IsNeighborSameShape, matchReaper, _gameData);
-        SelectionManager selectionManager = new(_board);
+        Container.BindInterfacesAndSelfTo<ShapeTypes>()
+           .AsSingle()
+           .WithArguments( _gameData.ShapeTypes );
 
-        Container.BindInstances( _gameData, _cellCreator, cellGrid, objectsPool, itemFactory, _board, matchReaper, matchChecker );
+        Container.BindInterfacesAndSelfTo<ObjectsPool<Item>>()
+           .AsSingle()
+           .WithArguments( _itemPrefab, _gameData.BoardSize.x * _gameData.BoardSize.y );
 
-        Container
-           .BindInterfacesAndSelfTo<SelectionManager>()
-           .FromInstance( selectionManager )
+        Container.BindInterfacesAndSelfTo<ItemFactory>()
+           .AsSingle()
+           .WithArguments( _itemShapesDrawer );
+
+        Container.BindInterfacesAndSelfTo<MatchReaper>()
            .AsSingle();
 
+        Container.BindInterfacesAndSelfTo<MatchChecker>()
+           .AsSingle();
 
-
+        Container.BindInterfacesAndSelfAsSingleFromInstance( _gameData );
+        Container.BindInterfacesAndSelfAsSingleFromInstance( _cellCreator );
+        Container.BindInterfacesAndSelfAsSingleFromInstance( _board );
+        Container.BindInterfacesAndSelfAsSingleFromInstance( _turns );
+        Container.BindInterfacesAndSelfAsSingleFromInstance( new SelectionManager( _board ) );
     }
 }
+
 }
