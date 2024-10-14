@@ -7,15 +7,17 @@ namespace _Project.Core.Buttons.ButtonContracts
 public abstract class ClickListenerButton : MonoBehaviour
 {
     [SerializeField] Button _button;
+    protected Button Button => _button;
 
     void OnValidate( ) =>
         _button = GetComponent<Button>();
 
-    void Awake( ) =>
+    void OnEnable( ) =>
         _button.onClick.AddListener( OnCLick );
 
-    void OnDestroy( ) =>
+    void OnDisable( ) =>
         _button.onClick.RemoveListener( OnCLick );
+
 
     protected abstract void OnCLick( );
 }
