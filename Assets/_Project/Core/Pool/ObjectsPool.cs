@@ -7,13 +7,13 @@ namespace _Project.Core.Pool
 public class ObjectsPool<T>
     where T : MonoBehaviour, IReleasable
 {
-    readonly Stack<T> _objects;
+    readonly Queue<T> _objects;
     readonly T _prefab;
 
     public ObjectsPool( T prefab, int prewarmObjectsAmount = 0 )
     {
         _prefab = prefab;
-        _objects = new Stack<T>();
+        _objects = new Queue<T>();
 
         for ( int i = 0; i < prewarmObjectsAmount; i++ )
         {
@@ -41,7 +41,7 @@ public class ObjectsPool<T>
     T Create( )
     {
         T obj = Object.Instantiate( _prefab );
-        _objects.Push( obj );
+        _objects.Enqueue( obj );
         return obj;
     }
 }
