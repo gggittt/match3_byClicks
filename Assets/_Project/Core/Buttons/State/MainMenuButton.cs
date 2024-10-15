@@ -13,7 +13,5 @@ public class MainMenuButton : ClickListenerButton
     {
         _stateMachine.Enter<MainMenuState>();
     }
-
-
 }
 }

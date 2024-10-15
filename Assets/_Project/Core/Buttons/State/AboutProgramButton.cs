@@ -9,7 +9,9 @@ public class AboutProgramButton : ClickListenerButton
 {
     [Inject] IGameStateMachine _stateMachine;
 
-    protected override void OnCLick( ) =>
+    protected override void OnCLick( )
+    {
         _stateMachine.Enter<AboutProgramState>();
+    }
 }
 }

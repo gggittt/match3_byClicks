@@ -1,10 +1,11 @@
 ﻿using _Project.Core.GameField.FieldItems;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace _Project.Core.GameField
 {
 [RequireComponent( typeof( SpriteRenderer ) )]
-public class Cell : MonoBehaviour
+public class Cell : MonoBehaviour, IPointerClickHandler
 {
     public Vector2Int LocalCoord { get; private set; }
     public Item Item { get; set; }
@@ -13,13 +14,6 @@ public class Cell : MonoBehaviour
 
     public event System.Action<Cell> Clicked;
 
-    void OnMouseUpAsButton( )
-    {
-        Debug.Log( $"<color=cyan> {nameof( OnMouseUpAsButton )} </color>" );
-
-        Clicked?.Invoke( this );
-    }
-
     public void Init( Vector2Int coords )
     {
         // _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -27,6 +21,11 @@ public class Cell : MonoBehaviour
         name = $"{nameof( Cell )} {LocalCoord} ";
     }
 
+    public void OnPointerClick( PointerEventData eventData )
+    {
+        Debug.Log( $"<color=cyan> {nameof( OnPointerClick )} </color>" );
 
+        Clicked?.Invoke( this );
+    }
 }
 }

@@ -21,14 +21,12 @@ public class GameOver
         {
             OnLose();
         }
-
     }
 
     void OnLose( )
     {
         //show popup -> ok btn -> to menu
         Debug.Log( $"<color=cyan> loser </color>" );
-
     }
 
     void OnWin( )
