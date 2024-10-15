@@ -1,26 +1,15 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using _Project.Core.Buttons.ButtonContracts;
+using UnityEngine;
 
 namespace _Project.Core.Buttons
 {
-public class OpenUrlButton : MonoBehaviour
+public class OpenUrlButton : ClickListenerButton
 {
     [SerializeField] string _url;
-    [SerializeField] Button _button;
 
-    void Awake( )
-    {
-        _button.onClick.AddListener( Perform );
-    }
-
-    void Perform( )
+    protected override void OnCLick( )
     {
         Application.OpenURL( _url );
-    }
-
-    void OnDestroy( )
-    {
-        _button.onClick.RemoveAllListeners();
     }
 }
 }

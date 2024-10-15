@@ -1,30 +1,17 @@
-﻿using _Project.Core.Infrastructure.GameStateMachine;
+﻿using _Project.Core.Buttons.ButtonContracts;
+using _Project.Core.Infrastructure.GameStateMachine;
 using _Project.Core.Infrastructure.GameStateMachine.States;
-using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace _Project.Core.Buttons
 {
-public class QuitApplicationButton : MonoBehaviour
+public class QuitApplicationButton : ClickListenerButton
 {
-    [SerializeField] Button _button;
-
     [Inject] IGameStateMachine _stateMachine;
 
-    void Awake( )
-    {
-        _button.onClick.AddListener( Perform );
-    }
-
-    void Perform( )
+    protected override void OnCLick( )
     {
         _stateMachine.Enter<QuitApplicationState>();
-    }
-
-    void OnDestroy( )
-    {
-        _button.onClick.RemoveAllListeners();
     }
 }
 }
